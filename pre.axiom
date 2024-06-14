@@ -1,0 +1,183 @@
+// parameters are ALL , ELT,  AEA or SET
+
+    ~B__(S, f, a:, b:, ab[|({a}{f}{b})|||!]:) //binary operation f:XxX->X, S: SET:X:X, f: SET:S:X
+        sab[|({a}×{b})|||!]: S:a:b
+        fsab[|(%{a}{f}{b}%)|||!]: f:sab:ab
+
+        1: EXE:ab:sab:fsab
+        2: UNQ:ab
+
+        @: AND:1:2
+
+    ~C__(X, Y, S[cartesian__product|{X}×{Y}|X,Y], a:, b:) //cartesian product XY S: SET:X:Y
+        sab[ordered__pair|({a}×{b})|||!]: S:a:b
+
+        @: EXE:sab
+
+    ~F__(f, x:, y[value|{f}({x})|f||!]:) //function f:X -> Y f: SET:X:Y  y < f:x
+        fxy[|(%{f}{x}{y}%)|||!]: f:x:y
+
+        1: EXE:fxy
+        2: UNQ:y
+
+        @: AND:1:2
+
+    ~BNO__(X, S, f, a:, b:) //binary operation f:XxX->X  S: SET:X:X, f: SET:S:X
+        ab: X < a:b:f
+
+		@: B__(S, f, a, b, ab)
+
+    ~ASS__(X, S, f, a:, b:, c:) //associative S: SET:X:X, f: SET:S:X
+        ab: X < a:b:f
+        bc: X < b:c:f
+        abc: X < a:b:c:f
+
+        1: B__(S, f, a, b, ab)
+        2: B__(S, f, b, c, bc)
+        3: B__(S, f, ab, c, abc)
+        4: B__(S, f, a, bc, abc)
+
+        @: AND:1:2:3:4
+
+    ~INV__(X, S, f, e:, x:) //inverse S: SET:X:X, f: SET:S:X
+        y[inverse|({x}⁻¹)|x]: X < x:f
+        xy: X < x:y:f
+        yx: X < x:y:f
+
+        1: EXE:y
+        2: B__(S, f, x, y, xy)
+        3: B__(S, f, y, x, yx)
+        4: EQL:X:xy:e:yx
+
+        @: AND:1:2:3:4
+
+    ~IDN__(X, S, f, e:, x:) //identity S: SET:X:X, f: SET:S:X
+        xe: X < x:e:f
+        ex: X < x:e:f
+
+        1: EXE:e
+        2: B__(S, f, x, e, xe)
+        3: B__(S, f, e, x, ex)
+        4: EQL:X:xe:x:ex
+
+        @: AND:1:2:3:4
+
+    ~SGP__(X, S, f, a:, b:, c:) //semigroup S: SET:X:X, f: SET:S:X
+		1: BNO__(X, S, f, a, b)
+        2: ASS__(X, S, f, a, b, c)
+
+        @: AND:1:2
+
+    ~MON__(X, S, f, e:, a:, b:, c:) //monoid S: SET:X:X, f: SET:S:X,
+        1: SGP__(X, S, f, a, b, c)
+        2: IDN__(X, S, f, e, a)
+
+        @: AND:1:2
+
+    ~GRP__(X, S, f, e:, a:, b:, c:) //group S: SET:X:X, f: SET:S:X,
+        1: MON__(X, S, f, e, a, b, c)
+        2: INV__(X, S, f, e, a)
+
+        @: AND:1:2
+
+	~MOR__(X, Y, SX, SY, fx, fy, f, a:, b:) // fx:XX->X, fy:YY->Y, f:X->Y
+        ab: X < a:b:fx
+        fa: Y < a:f
+        fb: Y < b:f
+        fab: Y < ab:f
+
+		1: F__(f, a, fa)
+		2: F__(f, b, fb)
+		3: F__(f, ab, fab)
+		4: B__(SX, fx, a, b, ab)
+		5: B__(SY, fy, fa, fb, fab)
+
+        @: AND:1:2:3:4:5
+
+    ~FXXXX //function f:X -> Y
+        X[domain|X]
+        Y[codomain|Y]
+        f[mapping|f/g|X]: SET:X:Y
+        x: ALL:X
+        y[value|{f}({x})|f||!]: Y < x:f
+
+        @: F__(f, x, y)
+
+    ~MGMXX //magma, binary operation f:XxX->X
+        X[magma|M]
+        S: SET:X:X
+        f[binary__operation|•|X|on]: SET:S:X
+        a, b: ALL:X
+
+        @: BNO__(X, S, f, a, b)
+
+	~MRPXX
+        X[magma|M]
+        Y[magma|N]
+        SX: SET:X:X
+        SY: SET:Y:Y
+        fx[binary__operation|•|X|on]: SET:SX:X
+        fy[binary__operation|*|Y|on]: SET:SY:Y
+        f[morphism|f|X,Y|from,to]: SET:X:Y
+		a, b: ALL:X
+		c, d: ALL:Y
+
+        1: BNO__(X, SX, fx, a, b)
+        2: BNO__(Y, SY, fy, c, d)
+		3: MOR__(X, Y, SX, SY, fx, fy, f, a, b)
+
+		@: AND:1:2:3
+
+    ~CXXXX //cartesian product XY
+    	X[set|X]
+    	Y[set|Y]
+    	f: SET:X:Y
+        a: ALL:X
+        b: ALL:Y
+
+        @: C__(X, Y, f, a, b)
+
+    ~SGPXX //semigroup (associative binary operation)
+    	X[semigroup|G]
+    	S: SET:X:X
+    	f[binary__operation|·|X|on]: SET:S:X
+        a, b, c: ALL:X
+
+        @: SGP__(X, S, f, a, b, c)
+
+
+	~SGPHX //semigroup homomorphism
+        X[semigroup|M]
+        Y[semigroup|N]
+        SX: SET:X:X
+        SY: SET:Y:Y
+        fx[binary__operation|•|X|on]: SET:SX:X
+        fy[binary__operation|*|Y|on]: SET:SY:Y
+        f[homomorphism|f|X,Y|from,to]: SET:X:Y
+		a, b, c: ALL:X
+		x, y, z: ALL:Y
+
+        1: SGP__(X, SX, fx, a, b, c)
+        2: SGP__(Y, SY, fy, x, y, z)
+		3: MOR__(X, Y, SX, SY, fx, fy, f, a, b)
+
+		@: AND:1:2:3
+
+
+    ~MONXX //monoid
+    	X[monoid|X]
+    	S: SET:X:X
+    	f[binary__operation|✲|X]: SET:S:X
+    	e[identity|e|X|||!]: X
+        a, b, c: ALL:X
+
+        @: MON__(X, S, f, e, a, b, c)
+
+    ~GRPXX //group
+    	X[group|G]
+    	S: SET:X:X
+    	f[binary__operation|•|X] SET:S:X
+    	e[identity|e/f|X]: X
+        a, b, c: ALL:X
+
+        @: GRP__(X, S, f, e, a, b, c)
