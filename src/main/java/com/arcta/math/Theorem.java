@@ -1,15 +1,18 @@
 package com.arcta.math;
 
-import com.arcta.math.Def.State; import com.arcta.math.Def.State.*;
+import com.arcta.math.Def.State;
+import com.arcta.math.Def.State.*;
+
 import java.util.*;
+
 import static com.arcta.math.Theorem.OutType.*;
-import static com.arcta.math.Util.*;
-import static com.arcta.math.Util.filter;
 import static com.arcta.math.Theorem.VarOut.generateReverseOutMap;
+import static com.arcta.math.Util.*;
 
 class Theorem {
     static Def currentDDebug = null;
     static String currentLemmaDebug = null;
+
     static void run(Def def) {
         currentDDebug = def;
         List<String> toWrite = list();
@@ -22,6 +25,7 @@ class Theorem {
         sout(string(toWrite, " "));
         Util.write("/Users/tom/math/mathematician/combined/" + def.name() + "-2.txt", toWrite);
     }
+
     static List<String> lemmas(Def def, OutType outType) {
         final List<String> toWriteTotal = list();
         final LinkedHashMap<String, List<String>> lemmaOut = new LinkedHashMap<>();
@@ -31,10 +35,12 @@ class Theorem {
         int lemmaNumber = 1;
         if (outType.equals(UNIQUENESSES) || outType.equals(EQUALITIES)) {
             for (int i = 0; i < reach.size(); i++) {
-                String debug = outType.filePrefix.toUpperCase() + "/" + (i + 1) + "/" + lemmaNumber; currentLemmaDebug = debug;
+                String debug = outType.filePrefix.toUpperCase() + "/" + (i + 1) + "/" + lemmaNumber;
+                currentLemmaDebug = debug;
                 List<String> strings = outLemma(def, (State) reach.get(i), varToStateMap, outType, true);
                 if (!empty(strings) && !lemmaOut.containsValue(strings)) {
-                    lemmaOut.put("\n\n" + debug + "\n", strings); lemmaNumber++;
+                    lemmaOut.put("\n\n" + debug + "\n", strings);
+                    lemmaNumber++;
                 }
             }
         } else {
@@ -44,11 +50,16 @@ class Theorem {
             }
         }
         for (Map.Entry<String, List<String>> entry : lemmaOut.entrySet()) {
-            toWriteTotal.add(entry.getKey()); toWriteTotal.addAll(entry.getValue());
+            toWriteTotal.add(entry.getKey());
+            toWriteTotal.addAll(entry.getValue());
         }
-        Util.write("/Users/tom/math/mathematician/" + def.name() + "/" + outType.filePrefix + "-" + def.name() + "-2.txt", toWriteTotal); return toWriteTotal;}
+        Util.write("/Users/tom/math/mathematician/" + def.name() + "/" + outType.filePrefix + "-" + def.name() + "-2.txt", toWriteTotal);
+        return toWriteTotal;
+    }
+
     static List<String> outLemma(Def def, State truth, Map<String, State> varToStateMap, OutType outType, boolean includeDefines) {
-        final Set<State> toDefine = new LinkedHashSet<>(); final List<State> statesToOut = list();
+        final Set<State> toDefine = new LinkedHashSet<>();
+        final List<State> statesToOut = list();
         final List<String> toWrite = list();
         final LinkedList<String> definesOutVars = new LinkedList<>();
         final Map<String, List<String>> outsMap = map();
@@ -85,7 +96,8 @@ class Theorem {
             if (!empty(toDefineElt) && hasInstance(toDefineElt, ALL.class)) {
                 return null;
             }
-            toDefine.addAll(toDefineElt);}
+            toDefine.addAll(toDefineElt);
+        }
         for (State state : toDefine) {
             getStatesRecurse(state, statesToOut, def);
         } //2. get states to out
@@ -140,6 +152,7 @@ class Theorem {
         }
         return toWrite;
     }
+
     static List<State> filterDefinesOut(Map<String, State> outStateMap, List<String> definesOutVarsOrdering) {
         List<State> definesStates = list();
         for (String define : definesOutVarsOrdering) {
@@ -150,6 +163,7 @@ class Theorem {
         }
         return definesStates;
     }
+
     static List<String> orderDefinesOut(LinkedList<String> definesOutVars, Map<String, State> outStateMap, Def def) {
         LinkedList<String> definesOutVarsOrdering = new LinkedList<>();
         List<String> outVarSection = list();
@@ -189,6 +203,7 @@ class Theorem {
         }
         return definesOutVarsOrdering;
     }
+
     static Set<State> getToDefine(Def def, State state) {
         final Set<State> toDefine = set();
         if (state instanceof UNQ) {
@@ -201,16 +216,19 @@ class Theorem {
             toDefine.add(def.get(((ELT) state).getUnderlying()));
         } else if (state instanceof EQL) {
             for (String eqlArg : ((EQL) state).getEqlArgs()) {
-                toDefine.add(def.get(eqlArg));}
+                toDefine.add(def.get(eqlArg));
+            }
         } else if (state instanceof AND) {
             for (String andArg : ((AND) state).getTruths()) {
-                toDefine.add( def.get(andArg));}
+                toDefine.add(def.get(andArg));
+            }
         } else if (state instanceof IMP) {
             toDefine.add(def.get(((IMP) state).getTruthA()));
             toDefine.add(def.get(((IMP) state).getTruthB()));
         }
         return toDefine;
     }
+
     static List<String> writeDefines(Def def, State truth, Map<String, List<String>> varOutsMap, List<State> definesStates) {
         List<String> toWrite = list();
         State previousWrittenState = null;
@@ -245,7 +263,8 @@ class Theorem {
             String type = empty(singular) ? "" : " be " + typeQuantifier + " " + singular.replace("__", " ");
             if (state instanceof ALL) {
                 String underlying = varOutsMap.get(((ALL) state).getUnderlying()).get(0);
-                if (previousWrittenState instanceof ALL && ((ALL) state).getUnderlying().equals(((ALL) previousWrittenState).getUnderlying())) { line = last(toWrite);
+                if (previousWrittenState instanceof ALL && ((ALL) state).getUnderlying().equals(((ALL) previousWrittenState).getUnderlying())) {
+                    line = last(toWrite);
                     toWrite.remove(toWrite.size() - 1);
                     String vars = line.substring(8, line.length() - (3 + underlying.length()));
                     line = "For all " + (vars + "," + mappedVarInstance) + " \u2208 " + underlying;
@@ -264,6 +283,7 @@ class Theorem {
         }
         return toWrite;
     }
+
     static String outStateRecurse(State state, Map<String, List<String>> varOutsMap, Def def, boolean negation) {
         String out = null;
         if (state instanceof UNQ) {
@@ -336,7 +356,11 @@ class Theorem {
         }
         return out;
     }
-    static boolean findDefinesRecurse(LinkedList<String> definesOutVars, Map<String, List<String>> outsMap, Map<String, List<String>> varOutsMap, Map<String, State> outStateMap, String out) {if (definesOutVars.contains(out)) { return true; }
+
+    static boolean findDefinesRecurse(LinkedList<String> definesOutVars, Map<String, List<String>> outsMap, Map<String, List<String>> varOutsMap, Map<String, State> outStateMap, String out) {
+        if (definesOutVars.contains(out)) {
+            return true;
+        }
         definesOutVars.add(out);
         State state = outStateMap.get(out);
         if (state == null) {
@@ -356,7 +380,10 @@ class Theorem {
                         List<String> realVars = guide.getRealVars();
                         List<String> mappedVars = list();
                         for (String realVar : realVars) {
-                            List<String> mappedRealVar = varOutsMap.get(realVar); if (empty(mappedRealVar)) {return false;}
+                            List<String> mappedRealVar = varOutsMap.get(realVar);
+                            if (empty(mappedRealVar)) {
+                                return false;
+                            }
                             mappedVars.addAll(mappedRealVar);
                         }
                         outsMap.get(out).addAll(mappedVars);
@@ -365,7 +392,9 @@ class Theorem {
             }
         }
         List<String> deps = outsMap.get(out);
-        if (empty(deps)) { return true; }
+        if (empty(deps)) {
+            return true;
+        }
         for (String depOut : deps) {
             if (!empty(depOut)) {
                 findDefinesRecurse(definesOutVars, outsMap, varOutsMap, outStateMap, depOut);
@@ -383,8 +412,11 @@ class Theorem {
         }
         return true;
     }
+
     static void getStatesRecurse(State state, List<State> states, Def def) {
-        if (states.contains(state)) { return; }
+        if (states.contains(state)) {
+            return;
+        }
         Set<String> referencedVars = set();
         if (state.meta().hasGuides()) {
             for (State.Guide guide : state.meta().getGuides()) {
@@ -403,40 +435,67 @@ class Theorem {
             getStatesRecurse(def.get(referencedVar), states, def);
         }
     }
+
     enum OutType {
-        UNIQUENESSES("unqs", "Uniqueness", d -> d.reachUnqs()),
-        EQUALITIES("eqls", "Equality", d -> d.reachEqls()),
-        EXISTENCES("exes", "Existence", d -> d.reachExes()),
-        NOT_EXISTENCES("notexes", "Non-Existence", d -> d.reachNotExes()),
-        NOT_EQUALITIES("noteqls", "Non-Equality", d -> d.reachNotEqls()),
-        IMPLICATIONS("imps", "Implication", d -> d.reachImps()),
-        ELTS("elts", "Elts", d -> d.elts()); //debug
+        UNIQUENESSES("unqs", "Uniqueness", d -> d.reachUnqs()), EQUALITIES("eqls", "Equality", d -> d.reachEqls()), EXISTENCES("exes", "Existence", d -> d.reachExes()), NOT_EXISTENCES("notexes", "Non-Existence", d -> d.reachNotExes()), NOT_EQUALITIES("noteqls", "Non-Equality", d -> d.reachNotEqls()), IMPLICATIONS("imps", "Implication", d -> d.reachImps()), ELTS("elts", "Elts", d -> d.elts()); //debug
         String filePrefix;
         String title;
         Reach reach;
+
         OutType(String filePrefix, String title, Reach reach) {
-            this.filePrefix = filePrefix; this.title = title; this.reach = reach;
+            this.filePrefix = filePrefix;
+            this.title = title;
+            this.reach = reach;
         }
-        interface Reach<T extends State> { List<T> get(Def def);}
+
+        interface Reach<T extends State> {
+            List<T> get(Def def);
+        }
     }
-    static class Out { String var; Guide guide; State sourceState;
+
+    static class Out {
+        String var;
+        Guide guide;
+        State sourceState;
+
         Out(String var, Guide guide, State sourceState) {
-            this.var = var;this.guide = guide;this.sourceState = sourceState;
+            this.var = var;
+            this.guide = guide;
+            this.sourceState = sourceState;
         }
-        String getVar() {return var;}
-        Guide getGuide() {return guide;}
-        void setVar(String var) {this.var = var;}
-        boolean hasVar(){return !empty(var);}
-        State getSourceState() {return sourceState;}
-        public String toString(){
+
+        String getVar() {
+            return var;
+        }
+
+        Guide getGuide() {
+            return guide;
+        }
+
+        void setVar(String var) {
+            this.var = var;
+        }
+
+        boolean hasVar() {
+            return !empty(var);
+        }
+
+        State getSourceState() {
+            return sourceState;
+        }
+
+        public String toString() {
             StringBuilder sb = new StringBuilder();
-            if (guide != null){
-                sb.append(guide.toString());
+            if (guide != null) {
+                sb.append(guide);
             }
             sb.append(" | " + var);
-            return sb.toString();}}
+            return sb.toString();
+        }
+    }
+
     static class VarOut {
-        static <T extends State> Map<String, List<String>> generateVarOutsMap(List<T> states, Def def){
+        static <T extends State> Map<String, List<String>> generateVarOutsMap(List<T> states, Def def) {
             List<Out> guidedOuts = list();
             LinkedHashMap<State, List<Out>> stateOuts = new LinkedHashMap<>();
             Map<String, List<String>> oldNewVars = map();
@@ -446,9 +505,10 @@ class Theorem {
                 if (state.meta().hasGuides()) {
                     for (Guide guide : state.meta().getGuides()) {
                         Out out = new Out(null, guide, state);
-                        outs.add(out); guidedOuts.add(out);
+                        outs.add(out);
+                        guidedOuts.add(out);
                     }
-                } else if (state instanceof ALL){
+                } else if (state instanceof ALL) {
                     outs.add(new Out(createALLOutVarSimple(stateOuts), null, state));
                 }
                 stateOuts.put(state, outs);
@@ -458,7 +518,7 @@ class Theorem {
             }
             for (Map.Entry<State, List<Out>> entry : stateOuts.entrySet()) {
                 List<Out> value = entry.getValue();
-                if (empty(value)){
+                if (empty(value)) {
                     oldNew.put(entry.getKey().var(), null);
                 } else {
                     List<String> outVars = list();
@@ -471,18 +531,21 @@ class Theorem {
             replaceSemicolonsWithCommas(oldNew);
             return oldNew;
         }
+
         static String createALLOutVarSimple(Map<State, List<Out>> stateOuts) {
-            for (String outVar : list("x","y","z")) {
+            for (String outVar : list("x", "y", "z")) {
                 if (noneMatch(stateOuts, outVar)) {
                     return outVar;
                 }
             }
             return extendVar(stateOuts, "x");
         }
-        static void updateGuidesRecurse(Out out, LinkedHashMap<State, List<Out>> stateOuts, Map<String, List<String>> oldNewVars, Def def, InstanceAuto count){
+
+        static void updateGuidesRecurse(Out out, LinkedHashMap<State, List<Out>> stateOuts, Map<String, List<String>> oldNewVars, Def def, InstanceAuto count) {
             count.incrementAndGet();
-            if (out.hasVar()) {List<String> newVars = oldNewVars.get(out.getSourceState().var());
-                if (empty(newVars)){
+            if (out.hasVar()) {
+                List<String> newVars = oldNewVars.get(out.getSourceState().var());
+                if (empty(newVars)) {
                     oldNewVars.put(out.getSourceState().var(), list(out.getVar()));
                 } else {
                     oldNewVars.get(out.getSourceState().var()).add(out.getVar());
@@ -493,7 +556,7 @@ class Theorem {
             for (String guideRealVar : guide.getRealVars()) {         //perform a check that the var is different from what's calling it
                 List<Out> guideRealVarOuts = stateOuts.get(def.get(guideRealVar));
                 for (Out guideRealVarOut : guideRealVarOuts) {
-                    if (!guideRealVarOut.equals(out)){
+                    if (!guideRealVarOut.equals(out)) {
                         updateGuidesRecurse(guideRealVarOut, stateOuts, oldNewVars, def, count);
                     }
                 }
@@ -501,21 +564,22 @@ class Theorem {
             Guide newGuide = guide.getMappedGuides(oldNewVars).get(0);
             String newVarPrefix = newGuide.asString();
             String extendedVar;
-            if (noneMatch(stateOuts, newVarPrefix) || map(def.reachUnqs(), u -> u.elt()).contains(out.getSourceState().var())){
+            if (noneMatch(stateOuts, newVarPrefix) || map(def.reachUnqs(), u -> u.elt()).contains(out.getSourceState().var())) {
                 extendedVar = newVarPrefix;
-            } else if (!empty(newGuide.getFixedAlternative()) && noneMatch(stateOuts, newGuide.getFixedAlternative())){
+            } else if (!empty(newGuide.getFixedAlternative()) && noneMatch(stateOuts, newGuide.getFixedAlternative())) {
                 extendedVar = newGuide.getFixedAlternative();
             } else {
                 extendedVar = extendVar(stateOuts, newVarPrefix);
             }
             out.setVar(extendedVar);
             List<String> newVars = oldNewVars.get(out.getSourceState().var());
-            if (empty(newVars)){
+            if (empty(newVars)) {
                 oldNewVars.put(out.getSourceState().var(), list(extendedVar));
             } else {
                 oldNewVars.get(out.getSourceState().var()).add(extendedVar);
             }
         }
+
         static void replaceSemicolonsWithCommas(Map<String, List<String>> varOutsMap) {
             for (List<String> list : varOutsMap.values()) {
                 if (!empty(list)) {
@@ -525,15 +589,18 @@ class Theorem {
                 }
             }
         }
-        static boolean noneMatch(Map<State, List<Out>> stateOuts, String var){
+
+        static boolean noneMatch(Map<State, List<Out>> stateOuts, String var) {
             for (List<Out> outList : stateOuts.values()) {
                 for (Out out : outList) {
-                    if (var.equals(out.getVar())){return false;
+                    if (var.equals(out.getVar())) {
+                        return false;
                     }
                 }
             }
             return true;
         }
+
         static String extendVar(Map<State, List<Out>> stateOuts, String varPrefix) {
             int toAppend = 1;
             while (containsVar(stateOuts, varPrefix + "-" + toAppend)) {
@@ -541,16 +608,18 @@ class Theorem {
             }
             return varPrefix + "-" + toAppend;
         }
+
         static boolean containsVar(Map<State, List<Out>> stateOuts, String var) {
             for (List<Out> outList : stateOuts.values()) {
                 for (Out out : outList) {
-                    if (var.equals(out.getVar())){
+                    if (var.equals(out.getVar())) {
                         return true;
                     }
                 }
             }
             return false;
         }
+
         static Map<String, State> generateReverseOutMap(Def def, Map<String, List<String>> varOutsMap) {
             Map<String, State> outStateMap = map();
             for (String var : varOutsMap.keySet()) {
@@ -564,6 +633,7 @@ class Theorem {
             }
             return outStateMap;
         }
+
         static MapSet<String, State> generateReverseOutMapComplete(Def def, Map<String, List<String>> varOutsMap) {
             MapSet<String, State> outStateMap = new MapSet<>();
             for (String var : varOutsMap.keySet()) {

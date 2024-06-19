@@ -7,12 +7,15 @@ import com.arcta.math.Def.State.Meta;
 import com.arcta.math.Def.State.SET;
 
 import java.io.IOException;
-import java.util.*;
-import static com.arcta.math.Parse.parseFile;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import static com.arcta.math.Def.State.LOG.TRUE;
+import static com.arcta.math.Parse.parseFile;
 import static com.arcta.math.Util.*;
 import static com.arcta.math.Util.Var.newVar;
-import static com.arcta.math.Util.list;
 
 class Control {
 
@@ -49,13 +52,14 @@ class Control {
             Def clonedDef = def.cloneDef(false);
             newSetVariables.add(clonedDef.getOldNewVarMap().get(set.var()));
             State newFinalState = clonedDef.getFinalState().cloneWithVar(newVar("*x" + i + "final", null));
-            clonedDef.removeFinalState(); clonedDef.addState(newFinalState);
+            clonedDef.removeFinalState();
+            clonedDef.addState(newFinalState);
             finalStates.add(newFinalState);
             combinedDef.addStates(clonedDef.getParamsAndStates());
         }
 
         combinedDef.addState(new AND(newVar("*@and", null), map(finalStates, s -> s.var()), new Meta("combined" + "-@")));
-        if (!combinedDef.reach().contains(TRUE)){
+        if (!combinedDef.reach().contains(TRUE)) {
             combinedDef.addState(TRUE);
             combinedDef.newFinalAndState(list(TRUE.var()));
         }
@@ -63,11 +67,16 @@ class Control {
     }
 
     static Def expandDefRecurse(String name, Map<String, Def> rawMap, Map<String, Def> expandMap, int level) {
-        final List<State> states = list(); final Def def = rawMap.get(name);
-        for (State state : def.states()) { if (!(state instanceof State.Extend)){ states.add(state); continue;}
-            State.Extend extend = (State.Extend) state; //3. expand def for extend
+        final List<State> states = list();
+        final Def def = rawMap.get(name);
+        for (State state : def.states()) {
+            if (!(state instanceof State.Extend extend)) {
+                states.add(state);
+                continue;
+            }
+            //3. expand def for extend
             Def expandDef = expandMap.get(extend.getExtendName());
-            if (expandDef == null){
+            if (expandDef == null) {
                 expandDef = expandDefRecurse(extend.getExtendName(), rawMap, expandMap, level + 1);
                 expandMap.put(extend.getExtendName(), expandDef);
             }
@@ -75,7 +84,8 @@ class Control {
             newExpandDef.prependToProvenance(extend.meta().prov());
             pushVars(newExpandDef, extend.args());
             State lastState = last(newExpandDef.states()).cloneWithVar(extend.var());
-            newExpandDef.removeFinalState(); newExpandDef.addState(lastState);
+            newExpandDef.removeFinalState();
+            newExpandDef.addState(lastState);
             states.addAll(newExpandDef.states());
             pullGuidesFromParams(newExpandDef.params(), states, level);
         }
@@ -87,17 +97,23 @@ class Control {
             for (State state : filter(states, s -> s.var().equals(param.var()))) {
                 Set<Guide> newGuides = mapToSet(param.meta().getGuides(), t -> new Guide(copy(t.getVars()), t.getFixedIndices(), currentLevel, t.getFixedAlternative()));
                 newGuides.addAll(state.meta().getGuides());
-                Meta meta = state.meta().cloneMeta().setExcludeFromDefines(param.meta().shouldExcludeFromDefines()
-                    || state.meta().shouldExcludeFromDefines()).setGuides(newGuides);
-                state.setMeta(meta);}
+                Meta meta = state.meta().cloneMeta().setExcludeFromDefines(param.meta().shouldExcludeFromDefines() || state.meta().shouldExcludeFromDefines()).setGuides(newGuides);
+                state.setMeta(meta);
+            }
         }
     }
 
-    static void pushVars(Def def, List<String> varsToInject) { Map<String, String> map = new HashMap<>(); List<State> params = list();
-        for (int i = 0; i < def.params().size(); i++) {map.put(def.params().get(i).var(), varsToInject.get(i));}
-        for (State param : def.params()) { State newParam = param.cloneWithVar(map.get(param.var()));
+    static void pushVars(Def def, List<String> varsToInject) {
+        Map<String, String> map = new HashMap<>();
+        List<State> params = list();
+        for (int i = 0; i < def.params().size(); i++) {
+            map.put(def.params().get(i).var(), varsToInject.get(i));
+        }
+        for (State param : def.params()) {
+            State newParam = param.cloneWithVar(map.get(param.var()));
             newParam.updateRefs(map);
-            params.add(newParam);}
+            params.add(newParam);
+        }
         def.setParams(params);
         def.states().forEach(s -> s.updateRefs(map));
     }
