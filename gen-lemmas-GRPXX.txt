@@ -1,0 +1,473 @@
+
+
+UNQS/1/1
+
+Let G be a group
+Let • be a binary operation of G
+For all x,y ∈ G
+
+x•y is unique
+
+
+UNQS/3/2
+
+Let G be a group
+Let • be a binary operation of G
+For all x,z ∈ G
+
+x•z is unique
+
+
+UNQS/4/3
+
+Let G be a group
+Let • be a binary operation of G
+For all x,y,z ∈ G
+
+x•(y•z) = (x•y)•z is unique
+
+
+UNQS/6/4
+
+Let G be a group
+Let • be a binary operation of G
+For all x ∈ G
+Let x⁻¹ be an inverse of x
+
+Then x•(x•(x⁻¹)) is unique
+
+
+UNQS/7/5
+
+Let G be a group
+Let • be a binary operation of G
+For all x ∈ G
+Let x⁻¹ be an inverse of x
+
+Then (x•(x⁻¹))•x is unique
+
+
+UNQS/8/6
+
+Let G be a group
+Let • be a binary operation of G
+For all x ∈ G
+Let x⁻¹ be an inverse of x
+
+Then x•(x⁻¹) is unique
+
+
+UNQS/9/7
+
+Let G be a group
+Let • be a binary operation of G
+For all x ∈ G
+Let x⁻¹ be an inverse of x
+
+Then (x⁻¹)•x is unique
+
+
+UNQS/10/8
+
+Let G be a group
+Let G-1 be a group
+Let • be a binary operation of G-1
+For all z,x-1 ∈ G-1
+
+z•x-1 is unique
+
+
+UNQS/12/9
+
+Let G be a group
+Let G-1 be a group
+Let • be a binary operation of G-1
+For all x-1,z ∈ G-1
+
+x-1•z is unique
+
+
+UNQS/13/10
+
+Let G be a group
+Let G-1 be a group
+Let • be a binary operation of G-1
+For all x-1,x-3,x-2 ∈ G-1
+
+x-1•(x-3•x-2) = (x-1•x-3)•x-2 is unique
+
+
+UNQS/15/11
+
+Let G be a group
+Let G-1 be a group
+Let • be a binary operation of G-1
+For all y ∈ G-1
+Let y⁻¹ be an inverse of y
+
+Then y•(y•(y⁻¹)) is unique
+
+
+UNQS/16/12
+
+Let G be a group
+Let G-1 be a group
+Let • be a binary operation of G-1
+For all y ∈ G-1
+Let y⁻¹ be an inverse of y
+
+Then (y•(y⁻¹))•y is unique
+
+
+UNQS/17/13
+
+Let G be a group
+Let G-1 be a group
+Let • be a binary operation of G-1
+For all y ∈ G-1
+Let y⁻¹ be an inverse of y
+
+Then y•(y⁻¹) is unique
+
+
+UNQS/18/14
+
+Let G be a group
+Let G-1 be a group
+Let • be a binary operation of G-1
+For all y ∈ G-1
+Let y⁻¹ be an inverse of y
+
+Then (y⁻¹)•y is unique
+
+
+UNQS/23/15
+
+Let G be a group
+Let • be a binary operation of G
+For all x,y,x-1 ∈ G
+
+x•(y•x-1) = (x•y)•x-1 is unique
+
+
+UNQS/25/16
+
+Let G be a group
+Let • be a binary operation of G
+For all x,y ∈ G
+
+y•x is unique
+
+
+UNQS/27/17
+
+Let G be a group
+Let • be a binary operation of G
+For all x,y,z ∈ G
+
+y•(x•z) = (y•x)•z is unique
+
+
+UNQS/29/18
+
+Let G be a group
+Let • be a binary operation of G
+For all y ∈ G
+Let y⁻¹ be an inverse of y
+
+Then y•(y•(y⁻¹)) is unique
+
+
+UNQS/30/19
+
+Let G be a group
+Let • be a binary operation of G
+For all y ∈ G
+Let y⁻¹ be an inverse of y
+
+Then (y•(y⁻¹))•y is unique
+
+
+UNQS/36/20
+
+Let G be a group
+Let • be a binary operation of G
+For all x,y,x-1 ∈ G
+
+y•(x•x-1) = (y•x)•x-1 is unique
+
+
+UNQS/38/21
+
+Let G be a group
+Let • be a binary operation of G
+For all y,z ∈ G
+
+z•y is unique
+
+
+UNQS/40/22
+
+Let G be a group
+Let • be a binary operation of G
+For all y,z,x-1 ∈ G
+
+z•(y•x-1) = (z•y)•x-1 is unique
+
+
+UNQS/49/23
+
+Let G be a group
+Let • be a binary operation of G
+For all y,x-1,x-2 ∈ G
+
+x-1•(y•x-2) = (x-1•y)•x-2 is unique
+
+
+UNQS/53/24
+
+Let G be a group
+Let • be a binary operation of G
+For all z,y ∈ G
+
+z•y is unique
+
+
+UNQS/54/25
+
+Let G be a group
+Let • be a binary operation of G
+For all x,z,y ∈ G
+
+x•(z•y) = (x•z)•y is unique
+
+
+UNQS/59/26
+
+Let G be a group
+Let • be a binary operation of G
+For all x-1,z ∈ G
+
+x-1•z is unique
+
+
+UNQS/60/27
+
+Let G be a group
+Let • be a binary operation of G
+For all x,x-1,z ∈ G
+
+x•(x-1•z) = (x•x-1)•z is unique
+
+
+UNQS/75/28
+
+Let G be a group
+Let • be a binary operation of G
+For all y,z ∈ G
+
+y•z is unique
+
+
+UNQS/77/29
+
+Let G be a group
+Let • be a binary operation of G
+For all y,x-1,z ∈ G
+
+y•(x-1•z) = (y•x-1)•z is unique
+
+
+UNQS/82/30
+
+Let G be a group
+Let • be a binary operation of G
+For all y,x-2,x-1 ∈ G
+
+y•(x-2•x-1) = (y•x-2)•x-1 is unique
+
+
+UNQS/93/31
+
+Let G be a group
+Let • be a binary operation of G
+For all x,x-2,x-1 ∈ G
+
+x•(x-2•x-1) = (x•x-2)•x-1 is unique
+
+
+UNQS/108/32
+
+Let G be a group
+Let • be a binary operation of G
+For all z,x-1 ∈ G
+
+z•x-1 is unique
+
+
+UNQS/110/33
+
+Let G be a group
+Let • be a binary operation of G
+For all z,x-2,x-1 ∈ G
+
+z•(x-2•x-1) = (z•x-2)•x-1 is unique
+
+
+UNQS/115/34
+
+Let G be a group
+Let • be a binary operation of G
+For all x-1,x-3,x-2 ∈ G
+
+x-1•(x-3•x-2) = (x-1•x-3)•x-2 is unique
+
+
+UNQS/129/35
+
+Let G be a group
+Let • be a binary operation of G
+For all y,z,x-1 ∈ G
+
+y•(z•x-1) = (y•z)•x-1 is unique
+
+
+UNQS/131/36
+
+Let G be a group
+Let • be a binary operation of G
+For all y,x-1 ∈ G
+
+y•x-1 is unique
+
+
+UNQS/132/37
+
+Let G be a group
+Let • be a binary operation of G
+For all x,z,x-1 ∈ G
+
+x•(z•x-1) = (x•z)•x-1 is unique
+
+
+UNQS/136/38
+
+Let G be a group
+Let • be a binary operation of G
+For all z,x-1,x-2 ∈ G
+
+x-1•(z•x-2) = (x-1•z)•x-2 is unique
+
+
+UNQS/164/39
+
+Let G be a group
+Let • be a binary operation of G
+For all y,z,x-1 ∈ G
+
+x-1•(y•z) = (x-1•y)•z is unique
+
+
+UNQS/167/40
+
+Let G be a group
+Let • be a binary operation of G
+For all x,y,z ∈ G
+
+x•(z•y) = (x•z)•y is unique
+
+
+UNQS/171/41
+
+Let G be a group
+Let • be a binary operation of G
+For all y,z,x-1 ∈ G
+
+y•(x-1•z) = (y•x-1)•z is unique
+
+
+UNQS/174/42
+
+Let G be a group
+Let • be a binary operation of G
+For all x,z,x-1 ∈ G
+
+x•(x-1•z) = (x•x-1)•z is unique
+
+
+UNQS/178/43
+
+Let G be a group
+Let • be a binary operation of G
+For all z,x-1,x-2 ∈ G
+
+x-1•(x-2•z) = (x-1•x-2)•z is unique
+
+
+EQLS/1/1
+
+Let G be a group
+Let • be a binary operation of G
+For all x ∈ G
+Let x⁻¹ be an inverse of x
+
+Then x•(x•(x⁻¹)) = x = (x•(x⁻¹))•x
+
+
+EQLS/2/2
+
+Let G be a group
+Let e be an identity of G
+Let • be a binary operation of G
+For all x ∈ G
+Let (x•(x⁻¹)•(x•(x⁻¹)))⁻¹ be an inverse of (x•(x⁻¹))•(x•(x⁻¹))
+Let x⁻¹ be an inverse of x
+For all y ∈ G
+Let (y•(x•(x⁻¹)))⁻¹ be an inverse of y•(x•(x⁻¹))
+For all z ∈ G
+Let z⁻¹ be an inverse of z
+For all x-1 ∈ G
+Let (x-1•(x•(x⁻¹)))⁻¹ be an inverse of x-1•(x•(x⁻¹))
+
+Then x•(x⁻¹) = e = (x⁻¹)•x = (y•(x•(x⁻¹))⁻¹)•(y•(x•(x⁻¹))) = (z⁻¹)•z = (y•(x•(x⁻¹)))•(y•(x•(x⁻¹))⁻¹) = (x•(x⁻¹)•(x•(x⁻¹)))•(((x•(x⁻¹))•(x•(x⁻¹)))⁻¹) = ((x•(x⁻¹)•(x•(x⁻¹)))⁻¹)•((x•(x⁻¹))•(x•(x⁻¹))) = z•(z⁻¹) = (x-1•(x•(x⁻¹))⁻¹)•(x-1•(x•(x⁻¹))) = (x-1•(x•(x⁻¹)))•(x-1•(x•(x⁻¹))⁻¹)
+
+
+EQLS/4/3
+
+Let G be a group
+Let e be an identity of G
+Let • be a binary operation of G
+For all x ∈ G
+Let x⁻¹ be an inverse of x
+
+Then x•(x⁻¹) = e = (x⁻¹)•x
+
+
+EQLS/5/4
+
+Let G be a group
+Let • be a binary operation of G
+For all x,y ∈ G
+Let y⁻¹ be an inverse of y
+
+Then (x•(y•(y⁻¹)))•(y•(y⁻¹)) = x•(y•(y⁻¹)) = (y•(y⁻¹))•(x•(y•(y⁻¹)))
+
+
+EQLS/6/5
+
+Let G be a group
+Let • be a binary operation of G
+For all x,y ∈ G
+Let y⁻¹ be an inverse of y
+
+Then x•(y•(y⁻¹)) = x = (y•(y⁻¹))•x
+
+
+EQLS/7/6
+
+Let G be a group
+Let • be a binary operation of G
+For all x ∈ G
+Let x⁻¹ be an inverse of x
+
+Then (x•(x⁻¹)•(x•(x⁻¹)))•(x•(x⁻¹)) = (x•(x⁻¹))•(x•(x⁻¹)) = (x•(x⁻¹))•(x•(x⁻¹)•(x•(x⁻¹)))

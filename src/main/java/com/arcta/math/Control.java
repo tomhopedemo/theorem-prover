@@ -37,7 +37,7 @@ class Control {
 
     static Def compile() throws IOException {
         Map<String, Def> expanded = map();
-        List<Def> defs = parseFile("/Users/tom/math/input/pre.axiom");
+        List<Def> defs = parseFile("/Users/tom/javas/math/pre.axiom");
         for (Def simpleDef : filter(defs, def -> !hasInstance(def.states(), State.Extend.class))) {
             expanded.put(simpleDef.name(), simpleDef);
         }

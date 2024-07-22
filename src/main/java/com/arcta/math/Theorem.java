@@ -23,7 +23,7 @@ class Theorem {
         toWrite.addAll(lemmas(def, NOT_EXISTENCES));
         toWrite.addAll(lemmas(def, NOT_EQUALITIES));
         sout(string(toWrite, " "));
-        Util.write("/Users/tom/math/mathematician/combined/" + def.name() + "-2.txt", toWrite);
+        Util.write("/Users/tom/javas/math/combined-" + def.name() + "-2.txt", toWrite);
     }
 
     static List<String> lemmas(Def def, OutType outType) {
@@ -53,7 +53,7 @@ class Theorem {
             toWriteTotal.add(entry.getKey());
             toWriteTotal.addAll(entry.getValue());
         }
-        Util.write("/Users/tom/math/mathematician/" + def.name() + "/" + outType.filePrefix + "-" + def.name() + "-2.txt", toWriteTotal);
+        Util.write("/Users/tom/javas/math/output-" + def.name() + "-" + outType.filePrefix + "-" + def.name() + "-2.txt", toWriteTotal);
         return toWriteTotal;
     }
 
