@@ -1,7 +1,7 @@
-package com.arcta.math;
+package math;
 
-import com.arcta.math.Def.State;
-import com.arcta.math.Def.State.*;
+import math.Def.State;
+import math.Def.State.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.arcta.math.Util.*;
+import static math.Util.*;
 import static java.nio.file.Files.readAllLines;
 
 class Parse {

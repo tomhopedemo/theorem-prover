@@ -1,4 +1,4 @@
-package com.arcta.math;
+package math;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,13 +1,13 @@
-package com.arcta.math;
+package math;
 
-import com.arcta.math.Def.State;
-import com.arcta.math.Def.State.*;
+import math.Def.State;
+import math.Def.State.*;
 
 import java.util.*;
 
-import static com.arcta.math.Theorem.OutType.*;
-import static com.arcta.math.Theorem.VarOut.generateReverseOutMap;
-import static com.arcta.math.Util.*;
+import static math.Theorem.OutType.*;
+import static math.Theorem.VarOut.generateReverseOutMap;
+import static math.Util.*;
 
 class Theorem {
     static Def currentDDebug = null;
@@ -23,7 +23,7 @@ class Theorem {
         toWrite.addAll(lemmas(def, NOT_EXISTENCES));
         toWrite.addAll(lemmas(def, NOT_EQUALITIES));
         sout(string(toWrite, " "));
-        Util.write("/Users/tom/javas/math/combined-" + def.name() + "-2.txt", toWrite);
+        Util.write("combined-" + def.name() + "-2.txt", toWrite);
     }
 
     static List<String> lemmas(Def def, OutType outType) {
@@ -53,7 +53,7 @@ class Theorem {
             toWriteTotal.add(entry.getKey());
             toWriteTotal.addAll(entry.getValue());
         }
-        Util.write("/Users/tom/javas/math/output-" + def.name() + "-" + outType.filePrefix + "-" + def.name() + "-2.txt", toWriteTotal);
+        Util.write("output-" + def.name() + "-" + outType.filePrefix + "-" + def.name() + "-2.txt", toWriteTotal);
         return toWriteTotal;
     }
 

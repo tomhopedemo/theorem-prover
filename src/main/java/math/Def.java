@@ -1,15 +1,14 @@
-package com.arcta.math;
+package math;
 
-import com.arcta.math.Def.State.*;
-import com.arcta.math.Util.*;
+import math.Def.State.*;
 
 import java.util.*;
 
-import static com.arcta.math.Util.Var.newVar;
-import static com.arcta.math.Util.*;
+import static math.Util.Var.newVar;
+import static math.Util.*;
 import static java.util.Collections.emptyList;
 
-class Def {
+public class Def {
     String name;
     List<State> params;
     List<State> states;

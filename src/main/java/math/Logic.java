@@ -1,15 +1,15 @@
-package com.arcta.math;
+package math;
 
-import com.arcta.math.Def.State.*;
+import math.Def.State.*;
 
 import java.util.*;
 
-import static com.arcta.math.Def.State.LOG.TRUE;
-import static com.arcta.math.Logic.LogicianType.DEDUCE;
-import static com.arcta.math.Logic.LogicianType.REDUCE;
-import static com.arcta.math.Theorem.VarOut.generateReverseOutMapComplete;
-import static com.arcta.math.Util.*;
-import static com.arcta.math.Util.Var.newVar;
+import static math.Def.State.LOG.TRUE;
+import static math.Logic.LogicianType.DEDUCE;
+import static math.Logic.LogicianType.REDUCE;
+import static math.Theorem.VarOut.generateReverseOutMapComplete;
+import static math.Util.*;
+import static math.Util.Var.newVar;
 
 class Logic {
     Def def;

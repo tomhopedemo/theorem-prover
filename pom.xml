@@ -2,11 +2,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.arcta.math</groupId>
-  <artifactId>math</artifactId>
+  <groupId>math</groupId>
+  <artifactId>theorem-prover</artifactId>
   <version>1</version>
   <packaging>jar</packaging>
-  <name>math</name>
+  <name>theorem-prover</name>
+
   <build>
     <plugins>
       <plugin>
@@ -35,7 +36,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>com.arcta.math.Control</mainClass>
+              <mainClass>math.Control</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>

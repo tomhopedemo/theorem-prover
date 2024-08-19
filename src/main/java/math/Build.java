@@ -1,17 +1,17 @@
-package com.arcta.math;
+package math;
 
-import com.arcta.math.Def.State.ALL;
-import com.arcta.math.Def.State.ELT;
-import com.arcta.math.Def.State.EXE;
+import math.Def.State.ALL;
+import math.Def.State.ELT;
+import math.Def.State.EXE;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import static com.arcta.math.Control.focus__debug;
-import static com.arcta.math.Util.*;
+import static math.Control.focus__debug;
+import static math.Util.*;
 
-class Build {
+public class Build {
     final List<Strategy> STRATS = list(new EltAllStrategy());
     Def def;
 
