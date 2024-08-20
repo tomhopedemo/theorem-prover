@@ -10,7 +10,7 @@ import static math.Parse.parseFile;
 import static math.Util.*;
 
 /*
- * 1. Create Rest API to offer data
+ *    Front end to display data from Rest endpoint for FXXXX in list. 
  */
 
 public class Control {
@@ -22,19 +22,26 @@ public class Control {
 
     static String name = "GRPXX";
     static int numInstances = 2;
-    static String executionBlock = "all";
+    static String executionBlock = "api";
     static Map<String, ExecutionControl> executionControls = createExecutionBlocks();
 
     static Map<String, ExecutionControl> createExecutionBlocks() {
         Map<String, ExecutionControl> blocks = new HashMap<>();
         blocks.put("s", new SingleX(name, numInstances));
         blocks.put("all", new AllX(numInstances));
+        blocks.put("api", new APIX());
         return blocks;
     }
 
     public record SingleX (String name, int numInstances) implements ExecutionControl {
         public void execute() throws Exception {
             runDefinition(name, numInstances);
+        }
+    }
+
+    public record APIX() implements ExecutionControl {
+        public void execute() throws Exception {
+            new ApiServer().run();
         }
     }
 
